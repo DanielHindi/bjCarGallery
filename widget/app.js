@@ -36,7 +36,8 @@ app.controller('galleryCtrl',['$scope',function($scope){
     var galleryOptions= {
         bgOpacity: .9,
         showHideOpacity:true,
-        closeOnScroll:false
+        closeOnScroll:false,
+        history:false
     };
 
     $scope.openItem = function(itm){

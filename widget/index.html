@@ -47,6 +47,7 @@
     <script src="photoSwipe/photoswipe-ui-default.min.js"></script>
 
     <style>
+
         body {
             margin: 0;
             background: #333 !important;
@@ -109,7 +110,7 @@
 </head>
 <body ng-controller="galleryCtrl" ng-cloak>
 
-<header  infinite-scroll="nextPage()">
+<header  infinite-scroll="nextPage()" infinite-scroll-distance="2" infinite-scroll-container="'body'">
     <div ng-repeat="itm in items" ng-click="openItem(itm)" >
         <img ng-src="{{ itm.src }}" alt="loading..." />
         <section>
@@ -186,16 +187,8 @@
     <script type="text/javascript" src="auction.js"></script>
     <script>
 
-        var pswpElement = document.querySelector('.pswp');
 
-        function openGallery(items,options) {
-            // define options (if needed)
-            if(!options ) options = {index:  0 };
 
-            // Initializes and opens PhotoSwipe
-            var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
-            gallery.init();
-        }
 
     </script>
     <script src="app.js"></script>

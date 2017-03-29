@@ -8,17 +8,26 @@ var app = angular.module('carGalleryApp',['infinite-scroll']);
 app.controller('galleryCtrl',['$scope',function($scope){
     $scope.items = [];
 
+    var cropOptions={ // landscape
+        width: Math.round(window.innerWidth * 0.66),
+        height: Math.round(window.innerHeight * 0.66)
+    };
+
+    if(window.innerHeight >window.innerWidth )
+        cropOptions={ // portrait
+            width: window.innerWidth ,
+            height: Math.round(window.innerWidth * (9/16))
+        };
+
+
     var itemIndex=0;
     $scope.nextPage= function() {
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < 50; i++) {
             itemIndex++;
             if(itemIndex > auction.items.length-1)break;
 
             var itm = auction.items[itemIndex ];
-            itm.src= buildfire.imageLib.cropImage(itm.images[0].fullsize_url, {
-                width: 'full',
-                height: Math.round(window.innerHeight / 2)
-            });
+            itm.src= buildfire.imageLib.cropImage(itm.images[0].fullsize_url, cropOptions);
             $scope.items.push(itm);
         }
     };
@@ -35,12 +44,9 @@ app.controller('galleryCtrl',['$scope',function($scope){
         itm.images.forEach(function(img){
             if(itm.images && itm.images.length) {
                 items.push({
-                    src: buildfire.imageLib.cropImage(img.fullsize_url, {
-                        width: 'full',
-                        height: Math.round(window.innerHeight / 2)
-                    }),
-                    w: 600,
-                    h: 400
+                    src: buildfire.imageLib.cropImage(img.fullsize_url, cropOptions),
+                    w: cropOptions.width,
+                    h: cropOptions.height
                 });
             }
 
